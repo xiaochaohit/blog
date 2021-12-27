@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>2021.12.21</title>
+    <url>/2021/12/21/2021-12-21/</url>
+    <content><![CDATA[<center>杭州·冬至</center>
+<center>冬月十八  新的开始</center>
+]]></content>
+      <categories>
+        <category>随记</category>
+      </categories>
+      <tags>
+        <tag>随记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建型-单例模式</title>
+    <url>/2021/12/26/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<p><img src="/2021/12/26/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/singleton.jpeg" alt="单例模式"></p>
+<span id="more"></span>
+
+<h1 id="单例模式-Singleton-Pattern"><a href="#单例模式-Singleton-Pattern" class="headerlink" title="单例模式(Singleton Pattern)"></a>单例模式(Singleton Pattern)</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>一个类只允许创建一个对象，那这个类就是一个单例类，这种模式就叫做单例模式</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>有些数据在系统中只应该保存一份，比较适合使用单例设计模式</p>
+<h2 id="常见形式"><a href="#常见形式" class="headerlink" title="常见形式"></a>常见形式</h2><ol>
+<li>饿汉式</li>
+<li>懒汉式</li>
+<li>双重检测</li>
+<li>静态内部类</li>
+<li>枚举形式</li>
+</ol>
+<h2 id="唯一性"><a href="#唯一性" class="headerlink" title="唯一性"></a>唯一性</h2><ol>
+<li>进程内唯一，常见的单例形式</li>
+<li>线程内唯一，通过ThreadLocal或者线程id等实现</li>
+<li>分布式唯一，通过分布式锁等保证唯一性</li>
+</ol>
+<h2 id="Go源码实现"><a href="#Go源码实现" class="headerlink" title="Go源码实现"></a>Go源码实现</h2><h2 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 恶汉式，加载时初始化</span></span><br><span class="line"><span class="keyword">type</span> Singleton <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> instance *Singleton</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">	instance = &amp;Singleton&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetInstance</span><span class="params">()</span> *<span class="title">Singleton</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> instance</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="懒汉式-1"><a href="#懒汉式-1" class="headerlink" title="懒汉式"></a>懒汉式</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;sync&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> lazysingleton *Singleton</span><br><span class="line"><span class="keyword">var</span> once sync.Once</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetLazySingleton</span><span class="params">()</span> *<span class="title">Singleton</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> lazysingleton == <span class="literal">nil</span> &#123;</span><br><span class="line">		once.Do(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">			lazysingleton = &amp;Singleton&#123;&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> lazysingleton</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>编程基础</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建型-工厂模式</title>
+    <url>/2021/12/26/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<p><img src="/2021/12/26/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/factory.jpeg" alt="工厂模式"></p>
+<span id="more"></span>
+
+<h1 id="工厂模式-Factory-Design-Pattern"><a href="#工厂模式-Factory-Design-Pattern" class="headerlink" title="工厂模式(Factory Design Pattern)"></a>工厂模式(Factory Design Pattern)</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>通过工厂类来实现对象实例的创建，以达到对象的创建和使用解耦的目的</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ol>
+<li><p>封装变化</p>
+<p>对象的创建逻辑可能有变化，封装成工厂类后，创建逻辑的变化对调用者透明</p>
+</li>
+<li><p>代码复用</p>
+<p>创建逻辑剥离到独立的工厂类后可以复用</p>
+</li>
+<li><p>隔离复杂性</p>
+<p>封装复杂的创建逻辑，调用者无需了解如何创建对象</p>
+</li>
+<li><p>控制复杂度</p>
+<p>将对象的创建逻辑剥离出来，让原本的函数或类的职责更单一，代码更简洁</p>
+</li>
+</ol>
+<h2 id="常见形式"><a href="#常见形式" class="headerlink" title="常见形式"></a>常见形式</h2><h3 id="1-简单工厂模式-Simple-Factory-Pattern"><a href="#1-简单工厂模式-Simple-Factory-Pattern" class="headerlink" title="1. 简单工厂模式(Simple Factory Pattern)"></a>1. 简单工厂模式(Simple Factory Pattern)</h3><p>在简单工厂模式中，可以根据参数的不同返回不同类的实例。也可以将简单工厂模式看做是工厂模式的特例。</p>
+<h3 id="2-工厂模式-Factory-Pattern"><a href="#2-工厂模式-Factory-Pattern" class="headerlink" title="2. 工厂模式(Factory Pattern)"></a>2. 工厂模式(Factory Pattern)</h3><p>在工厂方法模式中，工厂父类负责定义创建产品对象的公共接口，而工厂子类则负责生成具体的产品对象，这个子类工厂往往是同一个主题下的子类。</p>
+<h3 id="3-抽象工厂模式-Abstract-Factory-Pattern"><a href="#3-抽象工厂模式-Abstract-Factory-Pattern" class="headerlink" title="3.抽象工厂模式(Abstract Factory Pattern)"></a>3.抽象工厂模式(Abstract Factory Pattern)</h3><p>抽象工厂模式提供了一种方式，可以将一组具有同一主题的单独的工厂封装起来。一般来说我们可以让一个工厂负责创建多个不同类型的对象</p>
+<h2 id="Go源码实现"><a href="#Go源码实现" class="headerlink" title="Go源码实现"></a>Go源码实现</h2><h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> factory</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IConfigParser <span class="keyword">interface</span> &#123;</span><br><span class="line">	Parser()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> JsonConfigParser <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j JsonConfigParser)</span> <span class="title">Parser</span><span class="params">()</span></span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> XmlConfigParser <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(x XmlConfigParser)</span> <span class="title">Parser</span><span class="params">()</span></span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewConfigParser</span><span class="params">(t <span class="keyword">string</span>)</span> <span class="title">IConfigParser</span></span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> t &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&quot;json&quot;</span>:</span><br><span class="line">		<span class="keyword">return</span> JsonConfigParser&#123;&#125;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&quot;xml&quot;</span>:</span><br><span class="line">		<span class="keyword">return</span> XmlConfigParser&#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>NewConfigParser()</code>方法来创建不同的文件解析器，可以认为NewConfigParser就是一个简单工厂的入口。</p>
+<h3 id="带缓存的简单工厂"><a href="#带缓存的简单工厂" class="headerlink" title="带缓存的简单工厂"></a>带缓存的简单工厂</h3><p>若每次创建的解析器都一致，可以将解析器缓存到map中，每次根据输入来取出对应已的解析器，避免重复创建。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> parserCache <span class="keyword">map</span>[<span class="keyword">string</span>]IConfigParser</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">	parserCache[<span class="string">&quot;json&quot;</span>] = JsonConfigParser&#123;&#125;</span><br><span class="line">	parserCache[<span class="string">&quot;xml&quot;</span>] = XmlConfigParser&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewCachedConfigParser</span><span class="params">(t <span class="keyword">string</span>)</span> <span class="title">IConfigParser</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> parserCache[t]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> factory</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IConfigParserFactory <span class="keyword">interface</span> &#123;</span><br><span class="line">	CreateParser() IConfigParser</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> JosnConfigParserFactory <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j JosnConfigParserFactory)</span> <span class="title">CreateParser</span><span class="params">()</span> <span class="title">IConfigParser</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> JsonConfigParser&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> XmlConfigParserFactory <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(x XmlConfigParserFactory)</span> <span class="title">CreateParser</span><span class="params">()</span> <span class="title">IConfigParser</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> XmlConfigParser&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewConfigFactory</span><span class="params">(t <span class="keyword">string</span>)</span> <span class="title">IConfigParserFactory</span></span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> t &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&quot;json&quot;</span>:</span><br><span class="line">		<span class="keyword">return</span> JosnConfigParserFactory&#123;&#125;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">&quot;xml&quot;</span>:</span><br><span class="line">		<span class="keyword">return</span> XmlConfigParserFactory&#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>NewConfigFactory()</code>函数创建不同的工厂，再有工厂来创建对应的解析器，其实这里的也可以增加缓存具体的工厂来实现代码的进一步优化。</p>
+<p>当什么时候适合用工厂模式而不是简单工厂？若对象的创建比较复杂时，通过不同的工厂来封装不同对象的创建过程。</p>
+<h3 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h3><p>如果我们创建的解析器，既可以按照配置文件格式来分类，也可以按照解析的对象（Rule配置文件还是System系统配置）来分类，那我们会有如下4种parser类</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">JsonRuleConfigParser()</span><br><span class="line">XmlRuleConfigParser()</span><br><span class="line"></span><br><span class="line">JsonSystemConfigParser()</span><br><span class="line">XmlRuleConfigParser()</span><br></pre></td></tr></table></figure>
+
+<p>我们可以让一个工厂来创建多个不同类型的对象（IRuleConfigParser、ISystemConfigParser等），这样可以有效的减少工厂类的个数</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 抽象工厂</span></span><br><span class="line"><span class="keyword">type</span> IAbstractConfigParserFactory <span class="keyword">interface</span> &#123;</span><br><span class="line">	CreateRuleConfigParser() IRuleConfigParser</span><br><span class="line">	CreateSystemConfigParser() ISystemConfigParser</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体工厂</span></span><br><span class="line"><span class="keyword">type</span> JsonConfigParserFactory <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> XmlConfigParserFactory <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j JsonConfigParserFactory)</span> <span class="title">CreateRuleConfigParser</span><span class="params">()</span> <span class="title">IRuleConfigParser</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> JsonRuleConfigParser&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(j JsonConfigParserFactory)</span> <span class="title">CreateSystemConfigParser</span><span class="params">()</span> <span class="title">ISystemConfigParser</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> JsonSystemConfigParser&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(x XmlConfigParserFactory)</span> <span class="title">CreateRuleConfigParser</span><span class="params">()</span> <span class="title">IRuleConfigParser</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> XmlRuleConfigParser&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(x XmlConfigParserFactory)</span> <span class="title">CreateSystemConfigParser</span><span class="params">()</span> <span class="title">ISystemConfigParser</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> XmlSystemConfigParser&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>编程基础</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>项目管理“43210”法第一篇：总体介绍</title>
+    <url>/2021/12/22/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%951-%E6%80%BB%E4%BD%93%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<blockquote>
+<p>参考：<a href="https://www.cnblogs.com/liuyaozhi/p/15133982.html">https://www.cnblogs.com/liuyaozhi/p/15133982.html</a></p>
+</blockquote>
+<h2 id="项目管理总体介绍"><a href="#项目管理总体介绍" class="headerlink" title="项目管理总体介绍"></a>项目管理总体介绍</h2><h3 id="什么是项目管理"><a href="#什么是项目管理" class="headerlink" title="什么是项目管理"></a>什么是项目管理</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>项目管理就是将知识、技能、工具与技术应用于项目活动，以满足项目的要求</p>
+<span id="more"></span>
+
+<h4 id="五大过程及其之间关系"><a href="#五大过程及其之间关系" class="headerlink" title="五大过程及其之间关系"></a>五大过程及其之间关系</h4><p>启动、规划、执行、收尾及全程的监控，其相互关系如下图</p>
+<p><img src="/2021/12/22/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%951-%E6%80%BB%E4%BD%93%E4%BB%8B%E7%BB%8D/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%95-%E4%BA%94%E5%A4%A7%E8%BF%87%E7%A8%8B.png" alt="五大过程关系"></p>
+<p>项目启动-&gt;项目规划-&gt;项目执行，执行过程中可能会遇到变化，再根据变化内容重新调整规划，同时按照规划执行；执行结束后进入收尾阶段，输出项目总结。同时在整个过程中存在全程的监控机制</p>
+<h4 id="十大知识领域"><a href="#十大知识领域" class="headerlink" title="十大知识领域"></a>十大知识领域</h4><p>整合管理、范围管理、时间（进度）管理、成本管理、质量管理、人力资源管理、沟通管理、风险管理、采购管理、干系人管理</p>
+<h4 id="三重制约"><a href="#三重制约" class="headerlink" title="三重制约"></a>三重制约</h4><p>项目的范围、进度和成本之间相互制约的关系构成了项目管理的三重制约。只有合理的进度、合理的成本、合理的范围，满足符合要求的质量，才是真正的项目管理</p>
+<p><img src="/2021/12/22/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%951-%E6%80%BB%E4%BD%93%E4%BB%8B%E7%BB%8D/%E4%B8%89%E9%87%8D%E5%88%B6%E7%BA%A6.png" alt="三重制约"></p>
+<h3 id="如何评价一个项目是否成功"><a href="#如何评价一个项目是否成功" class="headerlink" title="如何评价一个项目是否成功"></a>如何评价一个项目是否成功</h3><h4 id="六个关键要素"><a href="#六个关键要素" class="headerlink" title="六个关键要素"></a>六个关键要素</h4><p>范围可行、进度可测、经营达成、风险可控、客户满意、团队高效</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>项目管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>项目管理“43210”法第二篇：4步开好头(上)</title>
+    <url>/2021/12/23/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%952-4%E6%AD%A5%E5%BC%80%E5%A5%BD%E5%A4%B4(%E4%B8%8A)/</url>
+    <content><![CDATA[<h2 id="识别价值"><a href="#识别价值" class="headerlink" title="识别价值"></a>识别价值</h2><h3 id="项目经理的三重境界"><a href="#项目经理的三重境界" class="headerlink" title="项目经理的三重境界"></a>项目经理的三重境界</h3><ol>
+<li>做事（任务驱动）</li>
+<li>行路（目标驱动）</li>
+<li>问道（价值驱动）</li>
+</ol>
+<span id="more"></span>
+
+<h3 id="项目价值的三大类"><a href="#项目价值的三大类" class="headerlink" title="项目价值的三大类"></a>项目价值的三大类</h3><ol>
+<li>战略价值</li>
+<li>商业价值</li>
+<li>团队或个人提升价值</li>
+</ol>
+<h3 id="如何识别价值"><a href="#如何识别价值" class="headerlink" title="如何识别价值"></a>如何识别价值</h3><ol>
+<li>找到真正的关键客户：做了谁受益，不做谁痛；</li>
+<li>识别真实需求：原始声音并不等于真实需求，能够解决客户痛点问题的才是真实需求</li>
+<li>价值评估及排序：评估满足各个真实需求之后带来的价值，并对价值进行排序，识别项目价值</li>
+</ol>
+<h3 id="价值在各个阶段的作用：兼职管理贯穿项目管理始终"><a href="#价值在各个阶段的作用：兼职管理贯穿项目管理始终" class="headerlink" title="价值在各个阶段的作用：兼职管理贯穿项目管理始终"></a>价值在各个阶段的作用：兼职管理贯穿项目管理始终</h3><ol>
+<li>项目立项时，项目目标要对准价值</li>
+<li>与干系人沟通时，要基于价值，确定沟通的要点和关注点，获得干系人对项目的支持和理解</li>
+<li>做项目关键决策时，要以价值为重要的判断依据</li>
+<li>变更时，要分析对价值的影响</li>
+<li>项目关闭时，审视项目价值是否达成</li>
+</ol>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
+<li>直接把原始声音当需求</li>
+<li>没有和关键干系人做沟通</li>
+<li>未识别关键需求，导致资源投入分散</li>
+</ol>
+<h3 id="军规"><a href="#军规" class="headerlink" title="军规"></a>军规</h3><p>价值管理是项目管理的原点和核心，贯穿项目管理的始终</p>
+<h2 id="明确目标"><a href="#明确目标" class="headerlink" title="明确目标"></a>明确目标</h2><h3 id="什么是目标"><a href="#什么是目标" class="headerlink" title="什么是目标"></a>什么是目标</h3><p>目标是项目目的和使命的具体化，就是实施项目所要达到的期望结果，即项目所能交付的成果或服务。包括经营、费用、进度、技术和质量等目标</p>
+<h3 id="SMART原则"><a href="#SMART原则" class="headerlink" title="SMART原则"></a>SMART原则</h3><ol>
+<li>Specific，具体的。指用具体的数据来描述项目希望达到的业绩，不用形容词，多一些数学</li>
+<li>Measurable，可衡量的。用什么量纲，参照物是什么？如何能客观评价？定性和定量都需要可比</li>
+<li>Attainable，可达到的。一是通过努力能够实现的目标，二是目标要具有挑战性，能够激励员工更进一步</li>
+<li>Relevant，相关的。目标的设定与项目希望达成的结果是强关联的</li>
+<li>Time-bound，有时限的。明确的完成时间限定</li>
+</ol>
+<h3 id="常见问题-1"><a href="#常见问题-1" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
+<li>目标能不能有效支撑价值实现</li>
+<li>目标制定过程中有没有充分沟通，对目标达成共识</li>
+<li>目标制定是否做到了SMART化</li>
+</ol>
+<h3 id="军规-1"><a href="#军规-1" class="headerlink" title="军规"></a>军规</h3><p>需求千万条，价值第一条。目标不明确，价值难实现</p>
+<h2 id="识别干系人"><a href="#识别干系人" class="headerlink" title="识别干系人"></a>识别干系人</h2><h3 id="什么是干系人"><a href="#什么是干系人" class="headerlink" title="什么是干系人"></a>什么是干系人</h3><p>干系人是可能会影响到项目，或者可能受到项目影响的人。就是在一个项目中，涉及到那些需要你去沟通的人</p>
+<h3 id="项目中常见的干系人"><a href="#项目中常见的干系人" class="headerlink" title="项目中常见的干系人"></a>项目中常见的干系人</h3><p>项目团队、资源经理、功能经理、发起人、供应商、客户等</p>
+<h3 id="干系人管理策略"><a href="#干系人管理策略" class="headerlink" title="干系人管理策略"></a>干系人管理策略</h3><ol>
+<li>重点管理：利益相关性高且影响力大</li>
+<li>随时告知：利益关系大但影响力不大</li>
+<li>令其满意：利益关系不大但影响力比较大</li>
+<li>监督：利益关系不大且影响力不大</li>
+</ol>
+<h3 id="常见问题-2"><a href="#常见问题-2" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
+<li>干系人识别错误</li>
+<li>干系人识别不全</li>
+<li>未识别出关键干系人</li>
+<li>未定期审视并刷新关键干系人</li>
+</ol>
+<h3 id="军规-2"><a href="#军规-2" class="headerlink" title="军规"></a>军规</h3><p>团结一切可以团结的力量</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>项目管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>项目管理“43210”法第三篇-4步开好头(下)</title>
+    <url>/2021/12/23/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%953-4%E6%AD%A5%E5%BC%80%E5%A5%BD%E5%A4%B4(%E4%B8%8B)/</url>
+    <content><![CDATA[<h2 id="组建团队"><a href="#组建团队" class="headerlink" title="组建团队"></a>组建团队</h2><h3 id="什么是团队"><a href="#什么是团队" class="headerlink" title="什么是团队"></a>什么是团队</h3><p>团队是由一定数量的成员组成，这些人具有互补的技能，对一个共同的目的、绩效目标及方法做出承诺并彼此负责</p>
+<span id="more"></span>
+
+<h3 id="团队形成期建设要点"><a href="#团队形成期建设要点" class="headerlink" title="团队形成期建设要点"></a>团队形成期建设要点</h3><ol>
+<li>选择互补性团队成员（性格互补、能力互补、人脉互补）</li>
+<li>澄清团队共同目标</li>
+<li>明确角色，合理分工</li>
+<li>建立团队运作规则</li>
+<li>开好开工会</li>
+</ol>
+<h4 id="如何开好开工会"><a href="#如何开好开工会" class="headerlink" title="如何开好开工会"></a>如何开好开工会</h4><ol>
+<li>会前充分沟通，达成共识</li>
+<li>会中控制氛围和议程</li>
+<li>会后发布纪要和规则</li>
+</ol>
+<h3 id="团队磨合期建设要点"><a href="#团队磨合期建设要点" class="headerlink" title="团队磨合期建设要点"></a>团队磨合期建设要点</h3><ol>
+<li>处理冲突</li>
+<li>发现并解决问题</li>
+</ol>
+<h3 id="团队规范期建设要点"><a href="#团队规范期建设要点" class="headerlink" title="团队规范期建设要点"></a>团队规范期建设要点</h3><ol>
+<li>规范工作流程和沟通机制</li>
+<li>做好授权和激励</li>
+<li>调整阵型，提升技能</li>
+</ol>
+<h3 id="团队表现期建设要点"><a href="#团队表现期建设要点" class="headerlink" title="团队表现期建设要点"></a>团队表现期建设要点</h3><ol>
+<li>深化知识/技能</li>
+<li>激发团队</li>
+</ol>
+<h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h4><ol>
+<li>缺乏核心资源</li>
+<li>团队能力互补性差</li>
+<li>目标和运作规则不清晰</li>
+<li>重要角色分工不明确等</li>
+</ol>
+<h4 id="军规"><a href="#军规" class="headerlink" title="军规"></a>军规</h4><p>兄弟齐心，其利断金</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>项目管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>项目管理“43210”法第四篇-3步规划妥</title>
+    <url>/2021/12/26/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%954-3%E6%AD%A5%E8%A7%84%E5%88%92%E5%A6%A5/</url>
+    <content><![CDATA[<h1 id="明确范围"><a href="#明确范围" class="headerlink" title="明确范围"></a>明确范围</h1><h2 id="什么是项目范围"><a href="#什么是项目范围" class="headerlink" title="什么是项目范围"></a>什么是项目范围</h2><p>为交付具有规定特性与功能的产品、服务或成果而必须完成的工作</p>
+<span id="more"></span>
+
+<h2 id="WBS制作原则"><a href="#WBS制作原则" class="headerlink" title="WBS制作原则"></a>WBS制作原则</h2><ol>
+<li>任务必须100%拆解，团队共同制定</li>
+<li>80小时原则：每个任务完成时间不超过2周</li>
+<li>一个WBS项目有且智能有一个责任主体</li>
+<li>彼此独立，完全穷尽</li>
+<li>有验收标准且对齐价值和目标</li>
+</ol>
+<h2 id="敏捷管理范围"><a href="#敏捷管理范围" class="headerlink" title="敏捷管理范围"></a>敏捷管理范围</h2><ol>
+<li>已明确的范围被划分成小的颗粒，不断的被实现和及早交付用户</li>
+<li>模糊的、不清晰的需求，及时/多频次同用户就需求进行对标，让可交付件和验收标准逐步清晰</li>
+</ol>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<li>关键环节缺失或者范围蔓延</li>
+<li>没有充分了解客户的需求</li>
+<li>需求管理不足，眉毛胡子一把抓</li>
+</ol>
+<h2 id="军规"><a href="#军规" class="headerlink" title="军规"></a>军规</h2><p>千斤重担人人挑，个个头上有指标</p>
+<h1 id="制定计划"><a href="#制定计划" class="headerlink" title="制定计划"></a>制定计划</h1><h2 id="计划的主要类别"><a href="#计划的主要类别" class="headerlink" title="计划的主要类别"></a>计划的主要类别</h2><h3 id="里程碑计划"><a href="#里程碑计划" class="headerlink" title="里程碑计划"></a>里程碑计划</h3><p>主节点计划，指要完成的阶段性、标志性的工作及时间点</p>
+<h3 id="详细计划"><a href="#详细计划" class="headerlink" title="详细计划"></a>详细计划</h3><p>计划之间的关联性；留出适当的冗余时间（20%）</p>
+<h2 id="常见问题-1"><a href="#常见问题-1" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<li>未卷入团队共同制定计划</li>
+<li>未考虑计划之间的关联性和依赖关系</li>
+<li>计划未留冗余</li>
+<li>未考虑制约因素和假设</li>
+</ol>
+<h2 id="军规-1"><a href="#军规-1" class="headerlink" title="军规"></a>军规</h2><p>好的计划是成功的一半</p>
+<h1 id="识别风险"><a href="#识别风险" class="headerlink" title="识别风险"></a>识别风险</h1><h2 id="风险的定义"><a href="#风险的定义" class="headerlink" title="风险的定义"></a>风险的定义</h2><p>一些事情具有不确定性，其发生会给项目造成一定的影响。狭义的风险是指给项目造成损失。广义的风险也包括项目的机会。</p>
+<h2 id="风险识别"><a href="#风险识别" class="headerlink" title="风险识别"></a>风险识别</h2><h3 id="四大方法"><a href="#四大方法" class="headerlink" title="四大方法"></a>四大方法</h3><p>风险库、头脑风暴、专家判断、回顾WBS</p>
+<h3 id="三大风险"><a href="#三大风险" class="headerlink" title="三大风险"></a>三大风险</h3><p>需求、关键资源和干系人不确定所带来的风险</p>
+<h2 id="风险分析"><a href="#风险分析" class="headerlink" title="风险分析"></a>风险分析</h2><p>利用风险矩阵，从风险发生的可能性和风险的影响度两个维度来分析。对那些发生可能性高，影响程度大的，要进行重点的管理，找出应对措施，甚至进行预防演练。</p>
+<h2 id="风险的应对与监控"><a href="#风险的应对与监控" class="headerlink" title="风险的应对与监控"></a>风险的应对与监控</h2><h3 id="常见应对措施"><a href="#常见应对措施" class="headerlink" title="常见应对措施"></a>常见应对措施</h3><p>规避、转移、减轻、接受</p>
+<h3 id="风险管理表"><a href="#风险管理表" class="headerlink" title="风险管理表"></a>风险管理表</h3><p>风险发生的概率、影响度、应对方式、责任主体</p>
+<h2 id="常见问题-2"><a href="#常见问题-2" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<li>缺乏风险意识</li>
+<li>风险识别不充分，缺乏应对措施</li>
+<li>关键风险未识别</li>
+</ol>
+<h2 id="军规-2"><a href="#军规-2" class="headerlink" title="军规"></a>军规</h2><p>有备无患，无备有患</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>项目管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>项目管理“43210”法第五篇-2步把好关</title>
+    <url>/2021/12/26/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%955-2%E6%AD%A5%E6%8A%8A%E5%A5%BD%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="有效监控"><a href="#有效监控" class="headerlink" title="有效监控"></a>有效监控</h1><h2 id="监控的主要对象"><a href="#监控的主要对象" class="headerlink" title="监控的主要对象"></a>监控的主要对象</h2><p>目标、进度、风险、关键资源、质量、团队氛围等</p>
+<span id="more"></span>
+
+<h2 id="监控的策略"><a href="#监控的策略" class="headerlink" title="监控的策略"></a>监控的策略</h2><ol>
+<li>广撒网：卷起裤腿两脚泥，深入现场，走动管理</li>
+<li>抓重点：容易发生问题的关键环节，频繁重点监控</li>
+<li>建机制：对监控发现的问题，建立机制（问题升级机制等）</li>
+</ol>
+<h2 id="冲突管理"><a href="#冲突管理" class="headerlink" title="冲突管理"></a>冲突管理</h2><h3 id="冲突来源"><a href="#冲突来源" class="headerlink" title="冲突来源"></a>冲突来源</h3><p>项目优先级、项目进度、资源、技术问题、成本等方面的冲突</p>
+<h3 id="冲突处理原则"><a href="#冲突处理原则" class="headerlink" title="冲突处理原则"></a>冲突处理原则</h3><ol>
+<li>大局观，抓主要矛盾和矛盾的主要方面，以公司的核心价值观、客户的利益为判断依据</li>
+<li>开放妥协，掌握灰度和平衡的原则来处理</li>
+<li>换位思考，抓大放小，求同存异，变冲突为机会</li>
+</ol>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<li>不深入现场，监控不到位</li>
+<li>缺乏有效的监控手段和方法</li>
+<li>未建立监控机制</li>
+</ol>
+<h2 id="军规"><a href="#军规" class="headerlink" title="军规"></a>军规</h2><p>做好过程监控和冲突管理，是实现项目目标的重要保障</p>
+<h1 id="变更管理"><a href="#变更管理" class="headerlink" title="变更管理"></a>变更管理</h1><h2 id="变更管理策略"><a href="#变更管理策略" class="headerlink" title="变更管理策略"></a>变更管理策略</h2><h3 id="项目早期"><a href="#项目早期" class="headerlink" title="项目早期"></a>项目早期</h3><p>只要合理，原则上倾向于接受，但必须建立和培养遵守变更控制的意识，不能让怎么干就怎么干</p>
+<h3 id="项目中期"><a href="#项目中期" class="headerlink" title="项目中期"></a>项目中期</h3><p>要通过分析变更的影响，充分分心变更的必要性、可行性和代价</p>
+<h3 id="变更后期"><a href="#变更后期" class="headerlink" title="变更后期"></a>变更后期</h3><p>变更代价大，要慎重考虑。遇到大的变更可以考虑启动一个新项目</p>
+<h2 id="变更管理方法"><a href="#变更管理方法" class="headerlink" title="变更管理方法"></a>变更管理方法</h2><p>抓住源头、分析影响、整合资源、铜盘考虑、做好计划、做好记录和审批工作、满足项目需求</p>
+<h2 id="常见问题-1"><a href="#常见问题-1" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<li>不接受变更</li>
+<li>盲目或随意变更</li>
+<li>未建立变更机制</li>
+</ol>
+<h2 id="军规-1"><a href="#军规-1" class="headerlink" title="军规"></a>军规</h2><p>变更不可怕，应对是良策</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>项目管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>项目管理“43210”法第六篇-1步善始终</title>
+    <url>/2021/12/26/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%956-1%E6%AD%A5%E5%96%84%E5%A7%8B%E7%BB%88/</url>
+    <content><![CDATA[<h1 id="项目总结"><a href="#项目总结" class="headerlink" title="项目总结"></a>项目总结</h1><h2 id="主要事项"><a href="#主要事项" class="headerlink" title="主要事项"></a>主要事项</h2><p>项目评价、知识收割（最大的浪费就是对知识、经验的浪费）</p>
+<span id="more"></span>
+
+<h2 id="如何做好项目评价"><a href="#如何做好项目评价" class="headerlink" title="如何做好项目评价"></a>如何做好项目评价</h2><ol>
+<li>事成：价值闭环，即范围可行，进度可测，风险可控，经营达成</li>
+<li>人爽：成长与锻炼，即客户满意、团队高效、周边部门满意</li>
+</ol>
+<h2 id="如何做好知识收割"><a href="#如何做好知识收割" class="headerlink" title="如何做好知识收割"></a>如何做好知识收割</h2><h3 id="知识收割全过程"><a href="#知识收割全过程" class="headerlink" title="知识收割全过程"></a>知识收割全过程</h3><ol>
+<li>事前策划</li>
+<li>事中收割（游戏是关键里程碑）</li>
+<li>事后收割（项目总结）</li>
+<li>发布分享</li>
+</ol>
+<h3 id="参与者"><a href="#参与者" class="headerlink" title="参与者"></a>参与者</h3><p>项目经理+团队成员</p>
+<h3 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h3><p>经验收割+文档收割+同行协助</p>
+<h3 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h3><p>AAR（After Action Review）任务后检视方法</p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<li>项目评分不充分</li>
+<li>把知识收割的案例写的很复杂，长篇大论</li>
+<li>只做显性的知识收割，忽略了隐性知识</li>
+<li>做完知识收割没有充分共享</li>
+</ol>
+<h2 id="军规"><a href="#军规" class="headerlink" title="军规"></a>军规</h2><p>以终为始，善始善终</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>项目管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>项目管理“43210”法第七篇-不做经营一切为0</title>
+    <url>/2021/12/26/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%957-%E4%B8%8D%E5%81%9A%E7%BB%8F%E8%90%A5%E4%B8%80%E5%88%87%E4%B8%BA0/</url>
+    <content><![CDATA[<h1 id="项目经营"><a href="#项目经营" class="headerlink" title="项目经营"></a>项目经营</h1><h2 id="为什么要关注项目经营"><a href="#为什么要关注项目经营" class="headerlink" title="为什么要关注项目经营"></a>为什么要关注项目经营</h2><ol>
+<li>组织层面：经营是公司实现生存、发展和盈利的重要手段</li>
+<li>项目层面：项目是公司最小的经营单元</li>
+<li>个人层面：不懂经营就不能成为一个合格的项目经理</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="什么是项目经理管理"><a href="#什么是项目经理管理" class="headerlink" title="什么是项目经理管理"></a>什么是项目经理管理</h2><p>用财务语言将项目价值、项目目标和结果量化和线性化，并对财务指标进行滚动预测、度量、分析、改进直至达到经营目标的全过程</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ol>
+<li>概算：要花多少钱</li>
+<li>预算：能花多少钱</li>
+<li>核算：已经花了多少钱</li>
+<li>决算：最终花了多少钱，花的是否合理</li>
+</ol>
+<h2 id="军规"><a href="#军规" class="headerlink" title="军规"></a>军规</h2><p>做好经营才是合格的项目经理</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>项目管理</tag>
+      </tags>
+  </entry>
+</search>
