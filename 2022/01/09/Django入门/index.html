@@ -20,22 +20,23 @@
     var CONFIG = {"hostname":"xiaochaohit.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="原型模式(Prototype Patten) 定义利用已有对象（原型）进行复制的方式来创建新对象，已达到节省创建时间的目的">
+  <meta name="description" content="介绍Django是一个高性能的Python Web框架，它追求开发的简洁、高效，使程序员可以专注于自己的业务代码。 本文主要记录笔者在入门时遇到的一些问题，方便以后查看，避免后人踩坑，并不会面面俱到，最好的教程仍旧是官方教程，官方教程请查看：https:&#x2F;&#x2F;docs.djangoproject.com&#x2F;zh-hans&#x2F;4.0&#x2F;   安装前置条件：python &amp; pip 建议使用pytho">
 <meta property="og:type" content="article">
-<meta property="og:title" content="创建型-原型模式">
-<meta property="og:url" content="https://xiaochaohit.github.io/2021/12/30/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="Django入门">
+<meta property="og:url" content="https://xiaochaohit.github.io/2022/01/09/Django%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="xiaochao的博客">
-<meta property="og:description" content="原型模式(Prototype Patten) 定义利用已有对象（原型）进行复制的方式来创建新对象，已达到节省创建时间的目的">
+<meta property="og:description" content="介绍Django是一个高性能的Python Web框架，它追求开发的简洁、高效，使程序员可以专注于自己的业务代码。 本文主要记录笔者在入门时遇到的一些问题，方便以后查看，避免后人踩坑，并不会面面俱到，最好的教程仍旧是官方教程，官方教程请查看：https:&#x2F;&#x2F;docs.djangoproject.com&#x2F;zh-hans&#x2F;4.0&#x2F;   安装前置条件：python &amp; pip 建议使用pytho">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://xiaochaohit.github.io/2021/12/30/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/prototype.jpeg">
-<meta property="article:published_time" content="2021-12-30T00:00:22.000Z">
-<meta property="article:modified_time" content="2022-01-04T06:42:08.000Z">
+<meta property="og:image" content="https://xiaochaohit.github.io/Users/xiaochaohit/SynologyDrive/blog/source/_posts/Django%E5%85%A5%E9%97%A8/Django%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png">
+<meta property="og:image" content="https://xiaochaohit.github.io/Users/xiaochaohit/SynologyDrive/blog/source/_posts/Django%E5%85%A5%E9%97%A8/hello.png">
+<meta property="article:published_time" content="2022-01-09T06:22:47.000Z">
+<meta property="article:modified_time" content="2022-01-09T06:23:41.347Z">
 <meta property="article:author" content="cc">
-<meta property="article:tag" content="设计模式">
+<meta property="article:tag" content="框架">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xiaochaohit.github.io/2021/12/30/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/prototype.jpeg">
+<meta name="twitter:image" content="https://xiaochaohit.github.io/Users/xiaochaohit/SynologyDrive/blog/source/_posts/Django%E5%85%A5%E9%97%A8/Django%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png">
 
-<link rel="canonical" href="https://xiaochaohit.github.io/2021/12/30/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
+<link rel="canonical" href="https://xiaochaohit.github.io/2022/01/09/Django%E5%85%A5%E9%97%A8/">
 
 
 <script id="page-configurations">
@@ -48,7 +49,7 @@
   };
 </script>
 
-  <title>创建型-原型模式 | xiaochao的博客</title>
+  <title>Django入门 | xiaochao的博客</title>
   
 
 
@@ -188,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xiaochaohit.github.io/2021/12/30/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://xiaochaohit.github.io/2022/01/09/Django%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpeg">
@@ -201,7 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          创建型-原型模式
+          Django入门
         </h1>
 
         <div class="post-meta">
@@ -210,23 +211,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-12-30 08:00:22" itemprop="dateCreated datePublished" datetime="2021-12-30T08:00:22+08:00">2021-12-30</time>
+              <time title="创建时间：2022-01-09 14:22:47 / 修改时间：14:23:41" itemprop="dateCreated datePublished" datetime="2022-01-09T14:22:47+08:00">2022-01-09</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-04 14:42:08" itemprop="dateModified" datetime="2022-01-04T14:42:08+08:00">2022-01-04</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">编程基础</span></a>
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
                 </span>
             </span>
 
@@ -246,8 +241,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2021/12/30/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/12/30/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/" itemprop="commentCount"></span>
+    <a title="valine" href="/2022/01/09/Django%E5%85%A5%E9%97%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/01/09/Django%E5%85%A5%E9%97%A8/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -257,7 +252,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>811</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -276,19 +271,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="原型模式-Prototype-Patten"><a href="#原型模式-Prototype-Patten" class="headerlink" title="原型模式(Prototype Patten)"></a>原型模式(Prototype Patten)</h1><p><img src="/2021/12/30/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F/prototype.jpeg" alt="原型模式"></p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>利用已有对象（原型）进行复制的方式来创建新对象，已达到节省创建时间的目的</p>
-<span id="more"></span>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Django是一个高性能的Python Web框架，它追求开发的简洁、高效，使程序员可以专注于自己的业务代码。</p>
+<p>本文主要记录笔者在入门时遇到的一些问题，方便以后查看，避免后人踩坑，并不会面面俱到，最好的教程仍旧是官方教程，官方教程请查看：<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.0/">https://docs.djangoproject.com/zh-hans/4.0/</a></p>
+<!--next-->
 
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ol>
-<li>对象创建成本比较大，并且同一个类对不同对象之间差别不大</li>
-</ol>
-<h2 id="常见分类"><a href="#常见分类" class="headerlink" title="常见分类"></a>常见分类</h2><ol>
-<li>浅拷贝</li>
-<li>深拷贝</li>
-</ol>
-<h2 id="Go源码实现"><a href="#Go源码实现" class="headerlink" title="Go源码实现"></a>Go源码实现</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> prototype</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 说明：</span></span><br><span class="line"><span class="comment">实现一个定时更新的关键词字典</span></span><br><span class="line"><span class="comment">其中key为关键词，value为该关键词对应的一些属性（出现频率，访问次数，更新时间等）</span></span><br><span class="line"><span class="comment">每次更新只会更新很少的一部分关键词，非全量更新</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;encoding/json&quot;</span></span><br><span class="line">	<span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> KeyWord <span class="keyword">struct</span> &#123;</span><br><span class="line">	Word       <span class="keyword">string</span></span><br><span class="line">	Freq       <span class="keyword">int</span></span><br><span class="line">	Visit      <span class="keyword">int</span></span><br><span class="line">	UpdateTime time.Time</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用序列化和反序列化实现深拷贝</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(k *KeyWord)</span> <span class="title">Clone</span><span class="params">()</span> *<span class="title">KeyWord</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> newKeyword KeyWord</span><br><span class="line">	b, _ := json.Marshal(k)</span><br><span class="line">	json.Unmarshal(b, &amp;newKeyword)</span><br><span class="line">	<span class="keyword">return</span> &amp;newKeyword</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> KeyWords <span class="keyword">map</span>[<span class="keyword">string</span>]*KeyWord</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(km KeyWords)</span> <span class="title">Clone</span><span class="params">(updateWords []*KeyWord)</span> <span class="title">KeyWords</span></span> &#123;</span><br><span class="line">	newKeyWords := KeyWords&#123;&#125;</span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> km &#123;</span><br><span class="line">		newKeyWords[k] = v</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> updateWords &#123;</span><br><span class="line">		newKeyWords[v.Word] = v.Clone()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> newKeyWords</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>前置条件：python &amp; pip</p>
+<p>建议使用python3.8版本（Django官网教程是基于3.8版本），基于python2.7只能支持Django 1.x版本，不能使用<code>django-admin</code>等命令</p>
+<h2 id="Django安装"><a href="#Django安装" class="headerlink" title="Django安装"></a>Django安装</h2><p>参考：<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/topics/install/#installing-official-release">https://docs.djangoproject.com/en/4.0/topics/install/#installing-official-release</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install Django</span><br></pre></td></tr></table></figure>
 
+<p>安装完成后，可使用，查看Django版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m django --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="第一个Django程序"><a href="#第一个Django程序" class="headerlink" title="第一个Django程序"></a>第一个Django程序</h2><h3 id="django-admin创建Django应用"><a href="#django-admin创建Django应用" class="headerlink" title="django-admin创建Django应用"></a><code>django-admin</code>创建Django应用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject mysite</span><br></pre></td></tr></table></figure>
+
+<p>创建好的模板工程结构如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysite/</span><br><span class="line">    manage.py</span><br><span class="line">    mysite/</span><br><span class="line">        __init__.py</span><br><span class="line">        settings.py</span><br><span class="line">        urls.py</span><br><span class="line">        asgi.py</span><br><span class="line">        wsgi.py</span><br></pre></td></tr></table></figure>
+
+<p><code>manage.py</code>:一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/ref/django-admin/">详情</a></p>
+<p><code>setting.py</code>:django工程的配置，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/topics/settings/">详情</a></p>
+<p><code>urls.py</code>:该 Django 项目的 URL 声明; 一份由 Django 驱动的网站”目录”，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/topics/http/urls/">详情</a></p>
+<p><code>asgi.py</code>: 一个 ASGI 兼容的 Web 服务器的入口，以便运行你的项目，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/howto/deployment/asgi/">详情</a></p>
+<p><code>wsgi.py</code>:  一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/">详情</a></p>
+<h3 id="启动django"><a href="#启动django" class="headerlink" title="启动django"></a>启动django</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
+
+<p>启动成功后，访问：<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/%EF%BC%8C%E7%9C%8B%E5%88%B0%E5%A6%82%E4%B8%8B%E7%95%8C%E9%9D%A2%E8%AF%B4%E6%98%8E%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F%E3%80%82%E7%94%B1%E4%BA%8E%E6%88%91%E4%BB%AC%E5%BC%80%E5%90%AF%E4%BA%86Debug%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%B2%A1%E6%9C%89%E9%85%8D%E7%BD%AE%E4%BB%BB%E4%BD%95%E9%A1%B5%E9%9D%A2%EF%BC%8C%E6%89%80%E4%BB%A5%E8%B7%B3%E8%BD%AC%E5%88%B0%E4%BA%86Django%E9%A2%84%E8%AE%BE%E7%9A%84%E6%AC%A2%E8%BF%8E%E9%A1%B5%E9%9D%A2">http://127.0.0.1:8000/，看到如下界面说明启动成功。由于我们开启了Debug模式，并且没有配置任何页面，所以跳转到了Django预设的欢迎页面</a><br><img src="/Users/xiaochaohit/SynologyDrive/blog/source/_posts/Django%E5%85%A5%E9%97%A8/Django%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" alt="Django启动成功"></p>
+<h3 id="Hello-World程序"><a href="#Hello-World程序" class="headerlink" title="Hello World程序"></a>Hello World程序</h3><ol>
+<li><p>创建视图文件view.py，并创建hello函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;Hello world&quot;</span>)</span><br><span class="line">    </span><br></pre></td></tr></table></figure></li>
+<li><p>配置url指向上一步创建的视图文件函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> view</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;hello/&#x27;</span>, view.hello)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+<li><p>启动Django后，打开URL：<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/hello/">http://127.0.0.1:8000/hello/</a></p>
+</li>
+</ol>
+<p><img src="/Users/xiaochaohit/SynologyDrive/blog/source/_posts/Django%E5%85%A5%E9%97%A8/hello.png" alt="helloworld"></p>
 
     </div>
 
@@ -298,7 +314,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+              <a href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag"># 框架</a>
           </div>
 
         
@@ -307,13 +323,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/27/%E5%88%9B%E5%BB%BA%E5%9E%8B-%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F/" rel="prev" title="创建型-建造者模式">
-      <i class="fa fa-chevron-left"></i> 创建型-建造者模式
+    <a href="/2022/01/09/test/" rel="prev" title="test">
+      <i class="fa fa-chevron-left"></i> test
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/01/04/%E7%BB%93%E6%9E%84%E5%9E%8B-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" rel="next" title="结构型-代理模式">
-      结构型-代理模式 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -373,7 +386,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F-Prototype-Patten"><span class="nav-number">1.</span> <span class="nav-text">原型模式(Prototype Patten)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.</span> <span class="nav-text">常见分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E6%BA%90%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">Go源码实现</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">Django安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AADjango%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">第一个Django程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#django-admin%E5%88%9B%E5%BB%BADjango%E5%BA%94%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">django-admin创建Django应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8django"><span class="nav-number">4.2.</span> <span class="nav-text">启动django</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-World%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.3.</span> <span class="nav-text">Hello World程序</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
