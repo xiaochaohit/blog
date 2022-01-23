@@ -205,10 +205,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-01-09 14:22:47 / 修改时间：14:23:41" itemprop="dateCreated datePublished" datetime="2022-01-09T14:22:47+08:00">2022-01-09</time>
+              <time title="创建时间：2022-01-09 14:22:47" itemprop="dateCreated datePublished" datetime="2022-01-09T14:22:47+08:00">2022-01-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 10:09:31" itemprop="dateModified" datetime="2022-01-10T10:09:31+08:00">2022-01-10</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -260,125 +266,14 @@
       
           <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Django是一个高性能的Python Web框架，它追求开发的简洁、高效，使程序员可以专注于自己的业务代码。</p>
 <p>本文主要记录笔者在入门时遇到的一些问题，方便以后查看，避免后人踩坑，并不会面面俱到，最好的教程仍旧是官方教程，官方教程请查看：<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.0/">https://docs.djangoproject.com/zh-hans/4.0/</a></p>
-<!--next-->
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>前置条件：python &amp; pip</p>
-<p>建议使用python3.8版本（Django官网教程是基于3.8版本），基于python2.7只能支持Django 1.x版本，不能使用<code>django-admin</code>等命令</p>
-<h2 id="Django安装"><a href="#Django安装" class="headerlink" title="Django安装"></a>Django安装</h2><p>参考：<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/topics/install/#installing-official-release">https://docs.djangoproject.com/en/4.0/topics/install/#installing-official-release</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install Django</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后，可使用，查看Django版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m django --version</span><br></pre></td></tr></table></figure>
-
-<h2 id="第一个Django程序"><a href="#第一个Django程序" class="headerlink" title="第一个Django程序"></a>第一个Django程序</h2><h3 id="django-admin创建Django应用"><a href="#django-admin创建Django应用" class="headerlink" title="django-admin创建Django应用"></a><code>django-admin</code>创建Django应用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject mysite</span><br></pre></td></tr></table></figure>
-
-<p>创建好的模板工程结构如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysite/</span><br><span class="line">    manage.py</span><br><span class="line">    mysite/</span><br><span class="line">        __init__.py</span><br><span class="line">        settings.py</span><br><span class="line">        urls.py</span><br><span class="line">        asgi.py</span><br><span class="line">        wsgi.py</span><br></pre></td></tr></table></figure>
-
-<p><code>manage.py</code>:一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/ref/django-admin/">详情</a></p>
-<p><code>setting.py</code>:django工程的配置，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/topics/settings/">详情</a></p>
-<p><code>urls.py</code>:该 Django 项目的 URL 声明; 一份由 Django 驱动的网站”目录”，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/topics/http/urls/">详情</a></p>
-<p><code>asgi.py</code>: 一个 ASGI 兼容的 Web 服务器的入口，以便运行你的项目，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/howto/deployment/asgi/">详情</a></p>
-<p><code>wsgi.py</code>:  一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目，<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/">详情</a></p>
-<h3 id="启动django"><a href="#启动django" class="headerlink" title="启动django"></a>启动django</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
-
-<p>启动成功后，访问：<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/%EF%BC%8C%E7%9C%8B%E5%88%B0%E5%A6%82%E4%B8%8B%E7%95%8C%E9%9D%A2%E8%AF%B4%E6%98%8E%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F%E3%80%82%E7%94%B1%E4%BA%8E%E6%88%91%E4%BB%AC%E5%BC%80%E5%90%AF%E4%BA%86Debug%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%B2%A1%E6%9C%89%E9%85%8D%E7%BD%AE%E4%BB%BB%E4%BD%95%E9%A1%B5%E9%9D%A2%EF%BC%8C%E6%89%80%E4%BB%A5%E8%B7%B3%E8%BD%AC%E5%88%B0%E4%BA%86Django%E9%A2%84%E8%AE%BE%E7%9A%84%E6%AC%A2%E8%BF%8E%E9%A1%B5%E9%9D%A2">http://127.0.0.1:8000/，看到如下界面说明启动成功。由于我们开启了Debug模式，并且没有配置任何页面，所以跳转到了Django预设的欢迎页面</a><br><img src="/Users/xiaochaohit/SynologyDrive/blog/source/_posts/Django%E5%85%A5%E9%97%A8/Django%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" alt="Django启动成功"></p>
-<h3 id="Hello-World程序"><a href="#Hello-World程序" class="headerlink" title="Hello World程序"></a>Hello World程序</h3><ol>
-<li><p>创建视图文件view.py，并创建hello函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;Hello world&quot;</span>)</span><br><span class="line">    </span><br></pre></td></tr></table></figure></li>
-<li><p>配置url指向上一步创建的视图文件函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> view</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;hello/&#x27;</span>, view.hello)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
-<li><p>启动Django后，打开URL：<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/hello/">http://127.0.0.1:8000/hello/</a></p>
-</li>
-</ol>
-<p><img src="/Users/xiaochaohit/SynologyDrive/blog/source/_posts/Django%E5%85%A5%E9%97%A8/hello.png" alt="helloworld"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xiaochaohit.github.io/2022/01/09/test/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpeg">
-      <meta itemprop="name" content="cc">
-      <meta itemprop="description" content="本站是xiaochao的博客，主要聚焦后端技术及通用技能">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xiaochao的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/09/test/" class="post-title-link" itemprop="url">test</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-01-09 14:22:47 / 修改时间：14:23:00" itemprop="dateCreated datePublished" datetime="2022-01-09T14:22:47+08:00">2022-01-09</time>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2022/01/09/test/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2022/01/09/test/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/01/09/Django%E5%85%A5%E9%97%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1236,6 +1131,119 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xiaochaohit.github.io/2021/12/26/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%956-%E4%B8%8D%E5%81%9A%E7%BB%8F%E8%90%A5%E4%B8%80%E5%88%87%E4%B8%BA0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpeg">
+      <meta itemprop="name" content="cc">
+      <meta itemprop="description" content="本站是xiaochao的博客，主要聚焦后端技术及通用技能">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaochao的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/12/26/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%956-%E4%B8%8D%E5%81%9A%E7%BB%8F%E8%90%A5%E4%B8%80%E5%88%87%E4%B8%BA0/" class="post-title-link" itemprop="url">项目管理“43210”法第六篇-不做经营一切为0</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-26 14:16:38" itemprop="dateCreated datePublished" datetime="2021-12-26T14:16:38+08:00">2021-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-30 07:38:37" itemprop="dateModified" datetime="2021-12-30T07:38:37+08:00">2021-12-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/12/26/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%956-%E4%B8%8D%E5%81%9A%E7%BB%8F%E8%90%A5%E4%B8%80%E5%88%87%E4%B8%BA0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/12/26/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%956-%E4%B8%8D%E5%81%9A%E7%BB%8F%E8%90%A5%E4%B8%80%E5%88%87%E4%B8%BA0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>206</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="项目经营"><a href="#项目经营" class="headerlink" title="项目经营"></a>项目经营</h1><h2 id="为什么要关注项目经营"><a href="#为什么要关注项目经营" class="headerlink" title="为什么要关注项目经营"></a>为什么要关注项目经营</h2><ol>
+<li>组织层面：经营是公司实现生存、发展和盈利的重要手段</li>
+<li>项目层面：项目是公司最小的经营单元</li>
+<li>个人层面：不懂经营就不能成为一个合格的项目经理</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/12/26/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%8643210%E6%B3%956-%E4%B8%8D%E5%81%9A%E7%BB%8F%E8%90%A5%E4%B8%80%E5%88%87%E4%B8%BA0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1307,7 +1315,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

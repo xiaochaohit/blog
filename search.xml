@@ -18,7 +18,7 @@
     <url>/2022/01/09/Django%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Django是一个高性能的Python Web框架，它追求开发的简洁、高效，使程序员可以专注于自己的业务代码。</p>
 <p>本文主要记录笔者在入门时遇到的一些问题，方便以后查看，避免后人踩坑，并不会面面俱到，最好的教程仍旧是官方教程，官方教程请查看：<a href="https://docs.djangoproject.com/zh-hans/4.0/">https://docs.djangoproject.com/zh-hans/4.0/</a></p>
-<!--next-->
+<span id="more"></span>
 
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>前置条件：python &amp; pip</p>
 <p>建议使用python3.8版本（Django官网教程是基于3.8版本），基于python2.7只能支持Django 1.x版本，不能使用<code>django-admin</code>等命令</p>
@@ -40,7 +40,7 @@
 <p><code>wsgi.py</code>:  一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目，<a href="https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/">详情</a></p>
 <h3 id="启动django"><a href="#启动django" class="headerlink" title="启动django"></a>启动django</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python manage.py runserver 0.0.0.0:8000</span><br></pre></td></tr></table></figure>
 
-<p>启动成功后，访问：<a href="http://127.0.0.1:8000/%EF%BC%8C%E7%9C%8B%E5%88%B0%E5%A6%82%E4%B8%8B%E7%95%8C%E9%9D%A2%E8%AF%B4%E6%98%8E%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F%E3%80%82%E7%94%B1%E4%BA%8E%E6%88%91%E4%BB%AC%E5%BC%80%E5%90%AF%E4%BA%86Debug%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%B2%A1%E6%9C%89%E9%85%8D%E7%BD%AE%E4%BB%BB%E4%BD%95%E9%A1%B5%E9%9D%A2%EF%BC%8C%E6%89%80%E4%BB%A5%E8%B7%B3%E8%BD%AC%E5%88%B0%E4%BA%86Django%E9%A2%84%E8%AE%BE%E7%9A%84%E6%AC%A2%E8%BF%8E%E9%A1%B5%E9%9D%A2">http://127.0.0.1:8000/，看到如下界面说明启动成功。由于我们开启了Debug模式，并且没有配置任何页面，所以跳转到了Django预设的欢迎页面</a><br><img src="/Users/xiaochaohit/SynologyDrive/blog/source/_posts/Django%E5%85%A5%E9%97%A8/Django%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" alt="Django启动成功"></p>
+<p>启动成功后，访问：<a href="http://127.0.0.1:8000/%EF%BC%8C%E7%9C%8B%E5%88%B0%E5%A6%82%E4%B8%8B%E7%95%8C%E9%9D%A2%E8%AF%B4%E6%98%8E%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F%E3%80%82%E7%94%B1%E4%BA%8E%E6%88%91%E4%BB%AC%E5%BC%80%E5%90%AF%E4%BA%86Debug%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%B2%A1%E6%9C%89%E9%85%8D%E7%BD%AE%E4%BB%BB%E4%BD%95%E9%A1%B5%E9%9D%A2%EF%BC%8C%E6%89%80%E4%BB%A5%E8%B7%B3%E8%BD%AC%E5%88%B0%E4%BA%86Django%E9%A2%84%E8%AE%BE%E7%9A%84%E6%AC%A2%E8%BF%8E%E9%A1%B5%E9%9D%A2">http://127.0.0.1:8000/，看到如下界面说明启动成功。由于我们开启了Debug模式，并且没有配置任何页面，所以跳转到了Django预设的欢迎页面</a><br><img src="/2022/01/09/Django%E5%85%A5%E9%97%A8/Django%E5%90%AF%E5%8A%A8%E6%88%90%E5%8A%9F.png" alt="Django启动成功"></p>
 <h3 id="Hello-World程序"><a href="#Hello-World程序" class="headerlink" title="Hello World程序"></a>Hello World程序</h3><ol>
 <li><p>创建视图文件view.py，并创建hello函数</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;Hello world&quot;</span>)</span><br><span class="line">    </span><br></pre></td></tr></table></figure></li>
@@ -49,7 +49,7 @@
 <li><p>启动Django后，打开URL：<a href="http://127.0.0.1:8000/hello/">http://127.0.0.1:8000/hello/</a></p>
 </li>
 </ol>
-<p><img src="/Users/xiaochaohit/SynologyDrive/blog/source/_posts/Django%E5%85%A5%E9%97%A8/hello.png" alt="helloworld"></p>
+<p><img src="/2022/01/09/Django%E5%85%A5%E9%97%A8/hello.png" alt="helloworld"></p>
 ]]></content>
       <categories>
         <category>python</category>
@@ -89,11 +89,6 @@
       <tags>
         <tag>设计模式</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>test</title>
-    <url>/2022/01/09/test/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>创建型-原型模式</title>
@@ -239,6 +234,23 @@
       </tags>
   </entry>
   <entry>
+    <title>结构型-装饰器模式</title>
+    <url>/2022/01/04/%E7%BB%93%E6%9E%84%E5%9E%8B-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="结构型-装饰器模式（Decorator-Design-Pattern）"><a href="#结构型-装饰器模式（Decorator-Design-Pattern）" class="headerlink" title="结构型-装饰器模式（Decorator Design Pattern）"></a>结构型-装饰器模式（Decorator Design Pattern）</h1><p><img src="/2022/01/04/%E7%BB%93%E6%9E%84%E5%9E%8B-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/decorator.jpeg" alt="装饰器模式"></p>
+<span id="more"></span>
+
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>装饰器主要用于解决继承过于复杂的问题，通过组合代替继承。他主要作用是给原始类添加增强功能</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>继承关系复杂，需要对基类进行功能增强的场景（Java Stream）</p>
+<h2 id="go源码实现"><a href="#go源码实现" class="headerlink" title="go源码实现"></a>go源码实现</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> decorator</span><br><span class="line"></span><br><span class="line"><span class="comment">// IDraw IDraw</span></span><br><span class="line"><span class="keyword">type</span> IDraw <span class="keyword">interface</span> &#123;</span><br><span class="line">    Draw() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Square 正方形</span></span><br><span class="line"><span class="keyword">type</span> Square <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Draw Draw</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s Square)</span> <span class="title">Draw</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;this is a square&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ColorSquare 有颜色的正方形</span></span><br><span class="line"><span class="keyword">type</span> ColorSquare <span class="keyword">struct</span> &#123;</span><br><span class="line">    square IDraw</span><br><span class="line">    color  <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// NewColorSquare NewColorSquare</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewColorSquare</span><span class="params">(square IDraw, color <span class="keyword">string</span>)</span> <span class="title">ColorSquare</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ColorSquare&#123;color: color, square: square&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Draw Draw</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c ColorSquare)</span> <span class="title">Draw</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> c.square.Draw() + <span class="string">&quot;, color is &quot;</span> + c.color</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>编程基础</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>结构型-适配器模式</title>
     <url>/2022/01/04/%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/</url>
     <content><![CDATA[<h1 id="适配器模式（Adapter-Design-Pattern）"><a href="#适配器模式（Adapter-Design-Pattern）" class="headerlink" title="适配器模式（Adapter Design Pattern）"></a>适配器模式（Adapter Design Pattern）</h1><p><img src="/2022/01/04/%E7%BB%93%E6%9E%84%E5%9E%8B-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/adapter.jpeg" alt="适配器模式"></p>
@@ -258,23 +270,6 @@
 </ol>
 <h2 id="go源码实现"><a href="#go源码实现" class="headerlink" title="go源码实现"></a>go源码实现</h2><p>假设我现在有一个运维系统，需要分别调用阿里云和 AWS 的 SDK 创建主机，两个 SDK 提供的创建主机的接口不一致，此时就可以通过适配器模式，将两个接口统一。</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> adapter</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ICreateServer 创建云主机</span></span><br><span class="line"><span class="keyword">type</span> ICreateServer <span class="keyword">interface</span> &#123;</span><br><span class="line">    CreateServer(cpu, mem <span class="keyword">float64</span>) error</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AWSClient aws sdk</span></span><br><span class="line"><span class="keyword">type</span> AWSClient <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// RunInstance 启动实例</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *AWSClient)</span> <span class="title">RunInstance</span><span class="params">(cpu, mem <span class="keyword">float64</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;aws client run success, cpu： %f, mem: %f&quot;</span>, cpu, mem)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AwsClientAdapter 适配器</span></span><br><span class="line"><span class="keyword">type</span> AwsClientAdapter <span class="keyword">struct</span> &#123;</span><br><span class="line">    Client AWSClient</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CreateServer 启动实例</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *AwsClientAdapter)</span> <span class="title">CreateServer</span><span class="params">(cpu, mem <span class="keyword">float64</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    a.Client.RunInstance(cpu, mem)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AliyunClient aliyun sdk</span></span><br><span class="line"><span class="keyword">type</span> AliyunClient <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CreateServer 启动实例</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *AliyunClient)</span> <span class="title">CreateServer</span><span class="params">(cpu, mem <span class="keyword">int</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;aws client run success, cpu： %d, mem: %d&quot;</span>, cpu, mem)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AliyunClientAdapter 适配器</span></span><br><span class="line"><span class="keyword">type</span> AliyunClientAdapter <span class="keyword">struct</span> &#123;</span><br><span class="line">    Client AliyunClient</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CreateServer 启动实例</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a *AliyunClientAdapter)</span> <span class="title">CreateServer</span><span class="params">(cpu, mem <span class="keyword">float64</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    a.Client.CreateServer(<span class="keyword">int</span>(cpu), <span class="keyword">int</span>(mem))</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>编程基础</category>
-      </categories>
-      <tags>
-        <tag>设计模式</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>结构型-装饰器模式</title>
-    <url>/2022/01/04/%E7%BB%93%E6%9E%84%E5%9E%8B-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="结构型-装饰器模式（Decorator-Design-Pattern）"><a href="#结构型-装饰器模式（Decorator-Design-Pattern）" class="headerlink" title="结构型-装饰器模式（Decorator Design Pattern）"></a>结构型-装饰器模式（Decorator Design Pattern）</h1><p><img src="/2022/01/04/%E7%BB%93%E6%9E%84%E5%9E%8B-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/decorator.jpeg" alt="装饰器模式"></p>
-<span id="more"></span>
-
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>装饰器主要用于解决继承过于复杂的问题，通过组合代替继承。他主要作用是给原始类添加增强功能</p>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>继承关系复杂，需要对基类进行功能增强的场景（Java Stream）</p>
-<h2 id="go源码实现"><a href="#go源码实现" class="headerlink" title="go源码实现"></a>go源码实现</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> decorator</span><br><span class="line"></span><br><span class="line"><span class="comment">// IDraw IDraw</span></span><br><span class="line"><span class="keyword">type</span> IDraw <span class="keyword">interface</span> &#123;</span><br><span class="line">    Draw() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Square 正方形</span></span><br><span class="line"><span class="keyword">type</span> Square <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Draw Draw</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s Square)</span> <span class="title">Draw</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;this is a square&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ColorSquare 有颜色的正方形</span></span><br><span class="line"><span class="keyword">type</span> ColorSquare <span class="keyword">struct</span> &#123;</span><br><span class="line">    square IDraw</span><br><span class="line">    color  <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// NewColorSquare NewColorSquare</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewColorSquare</span><span class="params">(square IDraw, color <span class="keyword">string</span>)</span> <span class="title">ColorSquare</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> ColorSquare&#123;color: color, square: square&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Draw Draw</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c ColorSquare)</span> <span class="title">Draw</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> c.square.Draw() + <span class="string">&quot;, color is &quot;</span> + c.color</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>编程基础</category>
