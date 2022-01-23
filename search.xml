@@ -580,4 +580,25 @@
         <tag>项目管理</tag>
       </tags>
   </entry>
+  <entry>
+    <title>结构型-组合模式</title>
+    <url>/2022/01/23/%E7%BB%93%E6%9E%84%E5%9E%8B-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="组合模式（Composite-Design-Pattern）"><a href="#组合模式（Composite-Design-Pattern）" class="headerlink" title="组合模式（Composite Design Pattern）"></a>组合模式（Composite Design Pattern）</h1><p><img src="/2022/01/23/%E7%BB%93%E6%9E%84%E5%9E%8B-%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/composite.jpeg" alt="组合模式"></p>
+<span id="more"></span>
+
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>将一组对象组织（Compose）成树形结构，以表示一种“部分 - 整<br>体”的层次结构。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><ol>
+<li>业务场景必须能够表示为树形结构</li>
+<li>例如：文件系统、员工系统（组织有各种层级，员工属于某个组织下）</li>
+</ol>
+<h2 id="go源码实现"><a href="#go源码实现" class="headerlink" title="go源码实现"></a>go源码实现</h2><p>公司的人员组织就是一个典型的树状的结构，现在假设我们现在有部分，和员工，两种角色，一个部门下面可以存在子部门和员工，员工下面不能再包含其他节点。<br>我们现在要实现一个统计一个部门工资的功能</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> composite</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;testing&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;github.com/stretchr/testify/assert&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestCountSalary</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    root := &amp;Department&#123;</span><br><span class="line">        subDepartment: <span class="built_in">make</span>([]HumanResouce, <span class="number">0</span>),</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    e1 := &amp;Employee&#123;Salary: <span class="number">10</span>&#125;</span><br><span class="line">    e2 := &amp;Employee&#123;Salary: <span class="number">15</span>&#125;</span><br><span class="line">    subDepartment := &amp;Department&#123;</span><br><span class="line">        subDepartment: []HumanResouce&#123;e1, e2&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">    e3 := &amp;Employee&#123;Salary: <span class="number">6</span>&#125;</span><br><span class="line">    root.AddSubDepartment(subDepartment)</span><br><span class="line">    root.AddSubDepartment(e3)</span><br><span class="line">    assert.Equal(t, <span class="number">31</span>, root.CountSalary())</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>编程基础</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
 </search>
